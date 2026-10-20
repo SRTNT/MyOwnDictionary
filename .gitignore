@@ -6,3 +6,6 @@ obj/
 *.suo
 .dotnet/
 TestResults/
+publish/
+*.keystore
+src/MyOwnDictionary.Android/signing.props

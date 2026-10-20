@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="MyTheme.NoActionBar" parent="@style/Theme.AppCompat.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <color name="window_background">#1F2127</color>
+</resources>

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyOwnDictionary.App", "MyOw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyOwnDictionary.Tests", "MyOwnDictionary.Tests\MyOwnDictionary.Tests.csproj", "{F4B461EB-37DA-494B-ABA5-E9C962C4C601}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyOwnDictionary.Android", "MyOwnDictionary.Android\MyOwnDictionary.Android.csproj", "{B746B83E-EAA4-480C-8D48-759C8FAF8520}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{F4B461EB-37DA-494B-ABA5-E9C962C4C601}.Release|x64.Build.0 = Release|Any CPU
 		{F4B461EB-37DA-494B-ABA5-E9C962C4C601}.Release|x86.ActiveCfg = Release|Any CPU
 		{F4B461EB-37DA-494B-ABA5-E9C962C4C601}.Release|x86.Build.0 = Release|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Debug|x64.Build.0 = Debug|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Debug|x86.Build.0 = Debug|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Release|x64.ActiveCfg = Release|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Release|x64.Build.0 = Release|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Release|x86.ActiveCfg = Release|Any CPU
+		{B746B83E-EAA4-480C-8D48-759C8FAF8520}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

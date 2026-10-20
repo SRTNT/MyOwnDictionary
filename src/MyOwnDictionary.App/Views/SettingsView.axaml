@@ -34,16 +34,18 @@
                     <TextBlock Text="On this device" Classes="card-title"/>
                     <TextBlock Text="The dictionary, history, and quiz progress stay in one database. Nothing is uploaded except the text you ask Google to translate." Classes="muted"/>
                     <TextBlock Text="{Binding StoragePath}" TextWrapping="Wrap"/>
-                    <TextBlock Text="Point this folder at OneDrive or Google Drive and those apps will sync it. Do not open MyOwnDictionary on two computers at the same time, and wait until sync finishes before opening it elsewhere." Classes="muted"/>
-                    <TextBlock Text="{Binding FolderMessage}" Classes="muted" TextWrapping="Wrap"/>
-                    <WrapPanel Orientation="Horizontal">
-                        <Button Classes="ghost" Content="Use OneDrive" Margin="0,0,8,8" Command="{Binding UseOneDriveCommand}"/>
-                        <Button Classes="ghost" Content="Use Google Drive" Margin="0,0,8,8" Command="{Binding UseGoogleDriveCommand}"/>
-                        <Button Classes="ghost" Content="Choose folder..." Margin="0,0,8,8" Click="ChooseFolder"/>
-                        <Button Classes="ghost" Content="Use this PC" Margin="0,0,8,8" Command="{Binding UseLocalCommand}"/>
-                    </WrapPanel>
-                    <TextBlock Text="{Binding OneDriveStatus}" Classes="muted" TextWrapping="Wrap"/>
-                    <TextBlock Text="{Binding GoogleDriveStatus}" Classes="muted" TextWrapping="Wrap"/>
+                    <StackPanel Spacing="8" IsVisible="{Binding CanChangeFolder}">
+                        <TextBlock Text="Point this folder at OneDrive or Google Drive and those apps will sync it. Do not open MyOwnDictionary on two computers at the same time, and wait until sync finishes before opening it elsewhere." Classes="muted"/>
+                        <TextBlock Text="{Binding FolderMessage}" Classes="muted" TextWrapping="Wrap"/>
+                        <WrapPanel Orientation="Horizontal">
+                            <Button Classes="ghost" Content="Use OneDrive" Margin="0,0,8,8" Command="{Binding UseOneDriveCommand}"/>
+                            <Button Classes="ghost" Content="Use Google Drive" Margin="0,0,8,8" Command="{Binding UseGoogleDriveCommand}"/>
+                            <Button Classes="ghost" Content="Choose folder..." Margin="0,0,8,8" Click="ChooseFolder"/>
+                            <Button Classes="ghost" Content="Use this PC" Margin="0,0,8,8" Command="{Binding UseLocalCommand}"/>
+                        </WrapPanel>
+                        <TextBlock Text="{Binding OneDriveStatus}" Classes="muted" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding GoogleDriveStatus}" Classes="muted" TextWrapping="Wrap"/>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </StackPanel>

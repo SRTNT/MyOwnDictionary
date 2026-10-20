@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:MyOwnDictionary.App.ViewModels"
+        xmlns:views="using:MyOwnDictionary.App.Views"
         x:Class="MyOwnDictionary.App.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Title="MyOwnDictionary"
@@ -9,99 +10,6 @@
         Height="840"
         MinWidth="1080"
         MinHeight="700"
-        FontFamily="{StaticResource BodyFont}"
-        Foreground="{DynamicResource TextPrimaryBrush}"
         Background="{DynamicResource WindowBackgroundBrush}">
-    <Grid x:Name="ShellGrid" RowDefinitions="Auto,Auto,*,Auto">
-        <Border Grid.Row="0" Background="{DynamicResource TopBarBrush}" Padding="22,12">
-            <Grid ColumnDefinitions="Auto,*,Auto,Auto" VerticalAlignment="Center">
-                <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                    <Image Width="36" Height="36" Source="avares://MyOwnDictionary/Assets/Icons/app-icon.png"/>
-                    <StackPanel VerticalAlignment="Center" Spacing="0">
-                        <TextBlock Text="MyOwnDictionary" Classes="topbar" FontFamily="{StaticResource TitleFont}" FontSize="16"/>
-                        <TextBlock Text="Persian · English" Classes="topbar" FontSize="12" Opacity="0.8"/>
-                    </StackPanel>
-                </StackPanel>
-                <TextBlock Grid.Column="2" Text="{Binding TodayLabel}" Classes="topbar desktop-only" VerticalAlignment="Center" Margin="0,0,14,0"/>
-                <Button Grid.Column="3" Classes="icon topbar" Command="{Binding ToggleThemeCommand}" ToolTip.Tip="Toggle light and dark theme">
-                    <TextBlock FontFamily="{StaticResource IconFont}" Text="{Binding ThemeIcon}" FontSize="18"/>
-                </Button>
-            </Grid>
-        </Border>
-        <Border Grid.Row="1" Classes="menubar desktop-only" Background="{DynamicResource SidebarBrush}" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="0,0,0,1" Padding="14,6">
-            <StackPanel Orientation="Horizontal" Spacing="2">
-                <Button Classes="nav" Classes.active="{Binding IsTranslateSelected}" Command="{Binding ShowTranslateCommand}">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE80F;" FontSize="15" VerticalAlignment="Center"/>
-                        <TextBlock Text="Dashboard" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="nav" Classes.active="{Binding IsDictionarySelected}" Command="{Binding ShowDictionaryCommand}">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE82D;" FontSize="15" VerticalAlignment="Center"/>
-                        <TextBlock Text="Dictionary" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="nav" Classes.active="{Binding IsHistoryEnglishSelected}" Command="{Binding ShowHistoryEnglishCommand}">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE81C;" FontSize="15" VerticalAlignment="Center"/>
-                        <TextBlock Text="History EN" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="nav" Classes.active="{Binding IsHistoryPersianSelected}" Command="{Binding ShowHistoryPersianCommand}">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE823;" FontSize="15" VerticalAlignment="Center"/>
-                        <TextBlock Text="History FA" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="nav" Classes.active="{Binding IsSettingsSelected}" Command="{Binding ShowSettingsCommand}">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE713;" FontSize="15" VerticalAlignment="Center"/>
-                        <TextBlock Text="Settings" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-        </Border>
-        <Grid x:Name="PageFrame" Grid.Row="2" Margin="28,18,28,22" RowDefinitions="Auto,*">
-            <StackPanel Spacing="2" Margin="0,0,0,16">
-                <TextBlock Text="{Binding PageTitle}" Classes="title" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding PageSubtitle}" Classes="muted" TextWrapping="Wrap"/>
-            </StackPanel>
-            <ContentControl Grid.Row="1" Content="{Binding CurrentPage}"/>
-        </Grid>
-        <Border Grid.Row="3" Classes="tabbar phone-only">
-            <UniformGrid Columns="5">
-                <Button Classes="tab" Classes.active="{Binding IsTranslateSelected}" Command="{Binding ShowTranslateCommand}">
-                    <StackPanel Spacing="2">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE80F;" FontSize="16" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Home" FontSize="11" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="tab" Classes.active="{Binding IsDictionarySelected}" Command="{Binding ShowDictionaryCommand}">
-                    <StackPanel Spacing="2">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE82D;" FontSize="16" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Words" FontSize="11" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="tab" Classes.active="{Binding IsHistoryEnglishSelected}" Command="{Binding ShowHistoryEnglishCommand}">
-                    <StackPanel Spacing="2">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE81C;" FontSize="16" HorizontalAlignment="Center"/>
-                        <TextBlock Text="EN" FontSize="11" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="tab" Classes.active="{Binding IsHistoryPersianSelected}" Command="{Binding ShowHistoryPersianCommand}">
-                    <StackPanel Spacing="2">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE823;" FontSize="16" HorizontalAlignment="Center"/>
-                        <TextBlock Text="FA" FontSize="11" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="tab" Classes.active="{Binding IsSettingsSelected}" Command="{Binding ShowSettingsCommand}">
-                    <StackPanel Spacing="2">
-                        <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE713;" FontSize="16" HorizontalAlignment="Center"/>
-                        <TextBlock Text="More" FontSize="11" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-            </UniformGrid>
-        </Border>
-    </Grid>
+    <views:MainView/>
 </Window>

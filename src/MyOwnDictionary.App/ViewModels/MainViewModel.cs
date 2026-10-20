@@ -49,7 +49,7 @@ public partial class MainViewModel : ObservableObject
     public string PageTitle => CurrentPage.Title;
     public string PageSubtitle => CurrentPage.Subtitle;
     public string TodayLabel => DateTime.Now.ToString("dddd, MMM d");
-    public string ThemeIcon => IsDarkTheme ? "\uE706" : "\uE708";
+    public string ThemeIcon => IsDarkTheme ? "\uF8A2" : "\uF87E";
     public bool IsTranslateSelected => ReferenceEquals(CurrentPage, TranslatePage);
     public bool IsDictionarySelected => ReferenceEquals(CurrentPage, DictionaryPage);
     public bool IsHistoryEnglishSelected => ReferenceEquals(CurrentPage, HistoryEnglishPage);

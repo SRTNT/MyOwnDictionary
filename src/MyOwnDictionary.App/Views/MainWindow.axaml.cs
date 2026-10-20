@@ -16,8 +16,6 @@ public partial class MainWindow : Window
         Height = 874;
         MinWidth = 360;
         MinHeight = 640;
-        Classes.Add("phone");
-        PageFrame.Margin = new Thickness(14, 12, 14, 8);
     }
 
     protected override void OnOpened(EventArgs e)

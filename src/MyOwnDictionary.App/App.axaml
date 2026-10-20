@@ -23,7 +23,7 @@
             <FontFamily x:Key="TitleFont">avares://MyOwnDictionary/Assets/Fonts/Poppins-SemiBold.ttf#Poppins SemiBold</FontFamily>
             <FontFamily x:Key="BodyFont">avares://MyOwnDictionary/Assets/Fonts/OpenSans-Regular.ttf#Open Sans</FontFamily>
             <FontFamily x:Key="PersianFont">avares://MyOwnDictionary/Assets/Fonts/Vazirmatn-Regular.ttf#Vazirmatn</FontFamily>
-            <FontFamily x:Key="IconFont">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
+            <FontFamily x:Key="IconFont">avares://MyOwnDictionary/Assets/Fonts/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular</FontFamily>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="ThemeBrush" Color="#3A61F6"/>

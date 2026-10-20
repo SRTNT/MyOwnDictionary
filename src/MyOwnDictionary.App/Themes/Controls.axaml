@@ -263,29 +263,29 @@
     <Style Selector=".phone-only" x:SetterTargetType="Control">
         <Setter Property="IsVisible" Value="False"/>
     </Style>
-    <Style Selector="Window.phone .phone-only" x:SetterTargetType="Control">
+    <Style Selector="UserControl.phone .phone-only" x:SetterTargetType="Control">
         <Setter Property="IsVisible" Value="True"/>
     </Style>
-    <Style Selector="Window.phone .desktop-only" x:SetterTargetType="Control">
+    <Style Selector="UserControl.phone .desktop-only" x:SetterTargetType="Control">
         <Setter Property="IsVisible" Value="False"/>
     </Style>
-    <Style Selector="Window.phone TextBlock.title">
+    <Style Selector="UserControl.phone TextBlock.title">
         <Setter Property="FontSize" Value="22"/>
     </Style>
-    <Style Selector="Window.phone TextBlock.welcome">
+    <Style Selector="UserControl.phone TextBlock.welcome">
         <Setter Property="FontSize" Value="22"/>
     </Style>
-    <Style Selector="Window.phone TextBlock.stat">
+    <Style Selector="UserControl.phone TextBlock.stat">
         <Setter Property="FontSize" Value="24"/>
     </Style>
-    <Style Selector="Window.phone TextBox.editor">
+    <Style Selector="UserControl.phone TextBox.editor">
         <Setter Property="MinHeight" Value="112"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
-    <Style Selector="Window.phone UniformGrid.choices">
+    <Style Selector="UserControl.phone UniformGrid.choices">
         <Setter Property="Columns" Value="1"/>
     </Style>
-    <Style Selector="Window.phone Border.card">
+    <Style Selector="UserControl.phone Border.card">
         <Setter Property="Padding" Value="14"/>
         <Setter Property="CornerRadius" Value="12"/>
     </Style>

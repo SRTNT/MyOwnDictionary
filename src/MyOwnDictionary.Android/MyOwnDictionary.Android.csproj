@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>24</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <RootNamespace>MyOwnDictionary.Droid</RootNamespace>
+    <AssemblyName>MyOwnDictionary</AssemblyName>
+    <ApplicationId>com.myowndictionary.app</ApplicationId>
+    <ApplicationTitle>MyOwnDictionary</ApplicationTitle>
+    <ApplicationVersion>2</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
+    <RuntimeIdentifiers>android-arm64</RuntimeIdentifiers>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidApkSignerAdditionalArguments>--v1-signing-enabled true</AndroidApkSignerAdditionalArguments>
+    <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SharedAppDir>..\MyOwnDictionary.App\</SharedAppDir>
+    <SharedAppExclude>$(SharedAppDir)bin\**;$(SharedAppDir)obj\**</SharedAppExclude>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Remove="Android.App" />
+    <Using Remove="Android.Widget" />
+    <Using Remove="Android.OS.Bundle" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(SharedAppDir)**\*.cs" Exclude="$(SharedAppExclude);$(SharedAppDir)Program.cs" Link="Shared\%(RecursiveDir)%(Filename)%(Extension)" />
+    <AvaloniaXaml Include="$(SharedAppDir)**\*.axaml" Exclude="$(SharedAppExclude)" Link="%(RecursiveDir)%(Filename)%(Extension)" />
+    <AvaloniaResource Include="$(SharedAppDir)Assets\**" Exclude="$(SharedAppDir)Assets\Icons\*.ico" Link="Assets\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Android" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.22" />
+    <PackageReference Include="SkiaSharp" Version="3.119.4" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Android" Version="3.119.4" />
+    <PackageReference Include="HarfBuzzSharp" Version="8.3.1.3" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.Android" Version="8.3.1.3" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyOwnDictionary.Core\MyOwnDictionary.Core.csproj" />
+  </ItemGroup>
+
+  <Import Project="signing.props" Condition="Exists('signing.props')" />
+
+</Project>

@@ -40,6 +40,7 @@ public partial class SettingsViewModel : ViewModelBase
     public string OneDriveStatus => HasOneDrive ? OneDriveFolder! : "OneDrive was not found on this PC.";
     public string GoogleDriveStatus => HasGoogleDrive ? GoogleDriveFolder! : "Google Drive was not found on this PC.";
     public bool IsCustomFolder => !AppPaths.IsDefaultFolder(_settings.Current.DataFolder);
+    public bool CanChangeFolder => !OperatingSystem.IsAndroid();
 
     [ObservableProperty] private bool _isDarkTheme;
     [ObservableProperty] private bool _onlineFallbackEnabled;

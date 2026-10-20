@@ -97,7 +97,7 @@
                         <TextBox Grid.Column="0" Classes="editor" Text="{Binding SourceText}" Watermark="Type in English or Persian"
                                  FontFamily="{Binding SourceTypeface}" FlowDirection="{Binding SourceFlow}"/>
                         <Button Grid.Column="1" Classes="swap" Margin="12,0" VerticalAlignment="Center" Command="{Binding SwapCommand}" ToolTip.Tip="Swap direction">
-                            <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE8AB;" FontSize="16"/>
+                            <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xF18E;" FontSize="16"/>
                         </Button>
                         <TextBox Grid.Column="2" Classes="editor" Text="{Binding Translation, Mode=OneWay}" IsReadOnly="True"
                                  Watermark="Translation appears here"
@@ -107,7 +107,7 @@
                         <TextBox Classes="editor" Text="{Binding SourceText}" Watermark="Type in English or Persian"
                                  FontFamily="{Binding SourceTypeface}" FlowDirection="{Binding SourceFlow}"/>
                         <Button Classes="swap" HorizontalAlignment="Center" Command="{Binding SwapCommand}" ToolTip.Tip="Swap direction">
-                            <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE8AB;" FontSize="16"/>
+                            <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xF18E;" FontSize="16"/>
                         </Button>
                         <TextBox Classes="editor" Text="{Binding Translation, Mode=OneWay}" IsReadOnly="True"
                                  Watermark="Translation appears here"

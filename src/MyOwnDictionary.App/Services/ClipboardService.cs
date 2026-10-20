@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 
 namespace MyOwnDictionary.App.Services;
@@ -10,11 +11,14 @@ public sealed class ClipboardService
         if (string.IsNullOrEmpty(text))
             return;
 
-        if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime lifetime)
-            return;
+        var top = Application.Current?.ApplicationLifetime switch
+        {
+            IClassicDesktopStyleApplicationLifetime desktop => desktop.MainWindow,
+            ISingleViewApplicationLifetime { MainView: { } view } => TopLevel.GetTopLevel(view),
+            _ => null
+        };
 
-        var clipboard = lifetime.MainWindow?.Clipboard;
-        if (clipboard is not null)
+        if (top?.Clipboard is { } clipboard)
             await clipboard.SetTextAsync(text);
     }
 }
