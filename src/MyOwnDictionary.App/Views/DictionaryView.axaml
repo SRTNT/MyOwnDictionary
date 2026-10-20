@@ -1,0 +1,72 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MyOwnDictionary.App.ViewModels"
+             x:Class="MyOwnDictionary.App.Views.DictionaryView"
+             x:DataType="vm:DictionaryViewModel">
+    <Grid RowDefinitions="Auto,*">
+        <Border Classes="card">
+            <StackPanel Spacing="12">
+                <TextBlock Text="Add or edit a word" Classes="card-title"/>
+                <Grid Classes="desktop-only" ColumnDefinitions="160,*,*,Auto,Auto" ColumnSpacing="10">
+                    <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="vm:LanguageOption">
+                                <TextBlock Text="{Binding Label}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox Grid.Column="1" Classes="field" Text="{Binding WordText}" Watermark="Word"
+                             FontFamily="{Binding WordTypeface}" FlowDirection="{Binding WordFlow}"/>
+                    <TextBox Grid.Column="2" Classes="field" Text="{Binding TranslationText}" Watermark="Translation"
+                             FontFamily="{Binding TranslationTypeface}" FlowDirection="{Binding TranslationFlow}"/>
+                    <Button Grid.Column="3" Classes="primary" Content="Add" Command="{Binding AddCommand}" VerticalAlignment="Center"/>
+                    <Button Grid.Column="4" Classes="ghost" Content="Update" Command="{Binding UpdateCommand}" IsEnabled="{Binding IsEditing}" VerticalAlignment="Center"/>
+                </Grid>
+                <StackPanel Classes="phone-only" Spacing="8">
+                    <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" HorizontalAlignment="Stretch">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="vm:LanguageOption">
+                                <TextBlock Text="{Binding Label}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox Classes="field" Text="{Binding WordText}" Watermark="Word"
+                             FontFamily="{Binding WordTypeface}" FlowDirection="{Binding WordFlow}"/>
+                    <TextBox Classes="field" Text="{Binding TranslationText}" Watermark="Translation"
+                             FontFamily="{Binding TranslationTypeface}" FlowDirection="{Binding TranslationFlow}"/>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button Classes="primary" Content="Add" Command="{Binding AddCommand}"/>
+                        <Button Classes="ghost" Content="Update" Command="{Binding UpdateCommand}" IsEnabled="{Binding IsEditing}"/>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Text="{Binding FormMessage}" Classes="muted" IsVisible="{Binding HasFormMessage}"/>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1" Margin="0,16,0,0" RowDefinitions="Auto,*">
+            <TextBox Classes="search" Text="{Binding SearchText}" Watermark="Search the dictionary"/>
+            <TextBlock Grid.Row="1" Text="No matching words." Classes="muted" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,24,0,0" IsVisible="{Binding IsEmpty}"/>
+            <ListBox Grid.Row="1" Classes="plain" Margin="0,12,0,0" ItemsSource="{Binding Rows}" IsVisible="{Binding !IsEmpty}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:DictionaryRow">
+                        <Border Classes="row">
+                            <StackPanel Spacing="8">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <TextBlock Text="{Binding LanguageLabel}" Classes="eyebrow" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" Margin="8,0,0,0" Text="{Binding SourceText}" FontFamily="{StaticResource PersianFont}" FontSize="16" FlowDirection="{Binding SourceFlow}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                    <Border Grid.Column="2" Classes="chip" Margin="8,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding OriginLabel}"/>
+                                    </Border>
+                                </Grid>
+                                <TextBlock Text="{Binding Translation}" FontFamily="{StaticResource PersianFont}" FontSize="16" FlowDirection="{Binding TranslationFlow}" TextWrapping="Wrap"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+                                    <Button Classes="tiny" Content="Edit" Command="{Binding EditCommand}"/>
+                                    <Button Classes="tiny danger" Content="Delete" Command="{Binding DeleteCommand}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</UserControl>

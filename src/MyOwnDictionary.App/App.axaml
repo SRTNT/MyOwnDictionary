@@ -1,0 +1,78 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MyOwnDictionary.App.ViewModels"
+             xmlns:views="using:MyOwnDictionary.App.Views"
+             x:Class="MyOwnDictionary.App.App"
+             RequestedThemeVariant="Dark">
+    <Application.DataTemplates>
+        <DataTemplate DataType="vm:TranslateViewModel">
+            <views:TranslateView/>
+        </DataTemplate>
+        <DataTemplate DataType="vm:DictionaryViewModel">
+            <views:DictionaryView/>
+        </DataTemplate>
+        <DataTemplate DataType="vm:HistoryViewModel">
+            <views:HistoryView/>
+        </DataTemplate>
+        <DataTemplate DataType="vm:SettingsViewModel">
+            <views:SettingsView/>
+        </DataTemplate>
+    </Application.DataTemplates>
+    <Application.Resources>
+        <ResourceDictionary>
+            <FontFamily x:Key="TitleFont">avares://MyOwnDictionary/Assets/Fonts/Poppins-SemiBold.ttf#Poppins SemiBold</FontFamily>
+            <FontFamily x:Key="BodyFont">avares://MyOwnDictionary/Assets/Fonts/OpenSans-Regular.ttf#Open Sans</FontFamily>
+            <FontFamily x:Key="PersianFont">avares://MyOwnDictionary/Assets/Fonts/Vazirmatn-Regular.ttf#Vazirmatn</FontFamily>
+            <FontFamily x:Key="IconFont">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="ThemeBrush" Color="#3A61F6"/>
+                    <SolidColorBrush x:Key="ThemeHoverBrush" Color="#2F52D6"/>
+                    <SolidColorBrush x:Key="AccentBrush" Color="#3A61F6"/>
+                    <SolidColorBrush x:Key="LimeBrush" Color="#34B1AA"/>
+                    <SolidColorBrush x:Key="DangerBrush" Color="#F95F53"/>
+                    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#D8D9E3"/>
+                    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#808191"/>
+                    <SolidColorBrush x:Key="NavLinkBrush" Color="#8C909A"/>
+                    <SolidColorBrush x:Key="TopBarBrush" Color="#1F2127"/>
+                    <SolidColorBrush x:Key="TopBarTextBrush" Color="#D8D9E3"/>
+                    <SolidColorBrush x:Key="SidebarBrush" Color="#1F2127"/>
+                    <SolidColorBrush x:Key="CardBrush" Color="#252730"/>
+                    <SolidColorBrush x:Key="CardBorderBrush" Color="#4A4C55"/>
+                    <SolidColorBrush x:Key="RowBrush" Color="#2C2E38"/>
+                    <SolidColorBrush x:Key="InputBrush" Color="#1F2127"/>
+                    <SolidColorBrush x:Key="BannerBrush" Color="#33F95F53"/>
+                    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#1F2127"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="ThemeBrush" Color="#1E7A46"/>
+                    <SolidColorBrush x:Key="ThemeHoverBrush" Color="#18683B"/>
+                    <SolidColorBrush x:Key="AccentBrush" Color="#1E7A46"/>
+                    <SolidColorBrush x:Key="LimeBrush" Color="#4DA761"/>
+                    <SolidColorBrush x:Key="DangerBrush" Color="#F95F53"/>
+                    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#111111"/>
+                    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#6C757D"/>
+                    <SolidColorBrush x:Key="NavLinkBrush" Color="#343A40"/>
+                    <SolidColorBrush x:Key="TopBarBrush" Color="#1E7A46"/>
+                    <SolidColorBrush x:Key="TopBarTextBrush" Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="SidebarBrush" Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="CardBrush" Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="CardBorderBrush" Color="#E4E6EB"/>
+                    <SolidColorBrush x:Key="RowBrush" Color="#F4F5F7"/>
+                    <SolidColorBrush x:Key="InputBrush" Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="BannerBrush" Color="#1AF95F53"/>
+                    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#F4F5F7"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    <Application.Styles>
+        <FluentTheme>
+            <FluentTheme.Palettes>
+                <ColorPaletteResources x:Key="Light" Accent="#FF1E7A46" RegionColor="#FFF4F5F7"/>
+                <ColorPaletteResources x:Key="Dark" Accent="#FF3A61F6" RegionColor="#FF1F2127"/>
+            </FluentTheme.Palettes>
+        </FluentTheme>
+        <StyleInclude Source="avares://MyOwnDictionary/Themes/Controls.axaml"/>
+    </Application.Styles>
+</Application>

@@ -1,0 +1,124 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MyOwnDictionary.App.ViewModels"
+             x:Class="MyOwnDictionary.App.Views.HistoryView"
+             x:DataType="vm:HistoryViewModel">
+    <UserControl.KeyBindings>
+        <KeyBinding Gesture="Enter" Command="{Binding Quiz.CheckCommand}"/>
+    </UserControl.KeyBindings>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,14">
+            <Button Classes="nav" Classes.active="{Binding IsHistoryTab}" Content="History" Command="{Binding ShowHistoryTabCommand}"/>
+            <Button Classes="nav" Classes.active="{Binding ShowQuiz}" Content="Quiz" Command="{Binding ShowQuizTabCommand}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" RowDefinitions="Auto,*" IsVisible="{Binding IsHistoryTab}">
+            <Grid Classes="desktop-only" ColumnDefinitions="*,Auto,Auto">
+                <TextBox Classes="search" Text="{Binding SearchText}" Watermark="Search this history"/>
+                <TextBlock Grid.Column="1" Text="{Binding Status}" Classes="muted" VerticalAlignment="Center" Margin="12,0"/>
+                <Button Grid.Column="2" Classes="ghost" Content="{Binding ClearLabel}" Command="{Binding ClearCommand}" VerticalAlignment="Center"/>
+            </Grid>
+            <StackPanel Classes="phone-only" Spacing="8">
+                <TextBox Classes="search" Text="{Binding SearchText}" Watermark="Search this history"/>
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{Binding Status}" Classes="muted" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    <Button Grid.Column="1" Classes="ghost" Content="{Binding ClearLabel}" Command="{Binding ClearCommand}" VerticalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Text="No history yet." Classes="muted" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,24,0,0" IsVisible="{Binding IsEmpty}"/>
+            <ListBox Grid.Row="1" Classes="plain" Margin="0,12,0,0" ItemsSource="{Binding Rows}" IsVisible="{Binding !IsEmpty}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:HistoryRow">
+                        <Border Classes="row">
+                            <StackPanel Spacing="8">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Text="{Binding When}" Classes="muted" VerticalAlignment="Center"/>
+                                    <Border Grid.Column="1" Classes="chip" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding OriginLabel}"/>
+                                    </Border>
+                                </Grid>
+                                <TextBlock Text="{Binding Input}" FontFamily="{StaticResource PersianFont}" FontSize="15" FlowDirection="{Binding SourceFlow}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Translation}" FontFamily="{StaticResource PersianFont}" FontSize="15" FlowDirection="{Binding TargetFlow}" TextWrapping="Wrap"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+                                    <Button Classes="tiny" Content="Open" Command="{Binding OpenCommand}"/>
+                                    <Button Classes="tiny" Content="Copy" Command="{Binding CopyCommand}"/>
+                                    <Button Classes="tiny danger" Content="Delete" Command="{Binding DeleteCommand}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" IsVisible="{Binding ShowQuiz}">
+            <StackPanel Spacing="16" MaxWidth="760" HorizontalAlignment="Left">
+                <Border Classes="card" IsVisible="{Binding Quiz.IsStart}">
+                    <StackPanel Spacing="14">
+                        <TextBlock Text="Quiz" Classes="card-title"/>
+                        <TextBlock Text="{Binding Quiz.CountsLabel}" Classes="muted"/>
+                        <TextBlock Text="{Binding Quiz.Note}" Classes="muted" IsVisible="{Binding Quiz.HasNote}"/>
+                        <TextBlock Text="Words" Classes="eyebrow"/>
+                        <WrapPanel Orientation="Horizontal">
+                            <Button Classes="nav" Classes.active="{Binding Quiz.PracticeLearningSelected}" Content="Still learning" Margin="0,0,8,8" Command="{Binding Quiz.PracticeLearningCommand}"/>
+                            <Button Classes="nav" Classes.active="{Binding Quiz.ReviewMastered}" Content="Review mastered" Margin="0,0,8,8" Command="{Binding Quiz.PracticeMasteredCommand}"/>
+                        </WrapPanel>
+                        <TextBlock Text="Answer" Classes="eyebrow"/>
+                        <WrapPanel Orientation="Horizontal">
+                            <Button Classes="nav" Classes.active="{Binding Quiz.PracticeChoiceSelected}" Content="Multiple choice" Margin="0,0,8,8" Command="{Binding Quiz.UseChoicesCommand}"/>
+                            <Button Classes="nav" Classes.active="{Binding Quiz.TypeAnswers}" Content="Type the answer" Margin="0,0,8,8" Command="{Binding Quiz.UseTypingCommand}"/>
+                        </WrapPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <TextBlock Text="Questions" VerticalAlignment="Center"/>
+                            <NumericUpDown Minimum="5" Maximum="30" Increment="1" Value="{Binding Quiz.QuestionCount}" Width="120" FormatString="0"/>
+                        </StackPanel>
+                        <Button Classes="primary" Content="Start quiz" Command="{Binding Quiz.StartCommand}" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="card" IsVisible="{Binding Quiz.IsQuestion}">
+                    <StackPanel Spacing="14">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="{Binding Quiz.SessionLabel}" Classes="eyebrow" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Quiz.WordProgress}" Classes="muted" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ProgressBar Minimum="0" Maximum="{Binding Quiz.SessionTotal}" Value="{Binding Quiz.Answered}" Height="8"/>
+                        <TextBlock Text="{Binding Quiz.Prompt}" FontFamily="{StaticResource PersianFont}" FontSize="28" FlowDirection="{Binding Quiz.PromptFlow}" TextWrapping="Wrap"/>
+                        <ItemsControl ItemsSource="{Binding Quiz.Choices}" IsVisible="{Binding Quiz.ShowChoices}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Classes="choices" Columns="2"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:QuizChoice">
+                                    <Button Classes="ghost choice" Content="{Binding Text}" Command="{Binding SelectCommand}"
+                                            FlowDirection="{Binding Flow}" FontFamily="{StaticResource PersianFont}"
+                                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,0,8,8"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <StackPanel Spacing="8" IsVisible="{Binding Quiz.ShowTyped}">
+                            <TextBox Classes="field" Text="{Binding Quiz.TypedAnswer}" Watermark="Type the translation"
+                                     FontFamily="{StaticResource PersianFont}" FlowDirection="{Binding Quiz.AnswerFlow}"/>
+                            <Button Classes="primary" Content="Check" Command="{Binding Quiz.CheckCommand}" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding Quiz.Feedback}" Foreground="{DynamicResource LimeBrush}" IsVisible="{Binding Quiz.LastCorrect}"/>
+                        <TextBlock Text="{Binding Quiz.Feedback}" Classes="error" IsVisible="{Binding Quiz.ShowWrong}"/>
+                        <Button Classes="primary" Content="Next" Command="{Binding Quiz.NextCommand}" HorizontalAlignment="Left" IsVisible="{Binding Quiz.HasFeedback}"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="card" IsVisible="{Binding Quiz.IsSummary}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Quiz finished" Classes="card-title"/>
+                        <TextBlock Text="{Binding Quiz.SummaryLabel}" Classes="muted"/>
+                        <TextBlock Text="Newly mastered" Classes="eyebrow" IsVisible="{Binding Quiz.HasNewlyMastered}"/>
+                        <TextBlock Text="{Binding Quiz.MasteredListText}" FontFamily="{StaticResource PersianFont}" FontSize="15" TextWrapping="Wrap" IsVisible="{Binding Quiz.HasNewlyMastered}"/>
+                        <Button Classes="primary" Content="Back" Command="{Binding Quiz.BackToStartCommand}" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

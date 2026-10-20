@@ -1,0 +1,158 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MyOwnDictionary.App.ViewModels"
+             x:Class="MyOwnDictionary.App.Views.TranslateView"
+             x:DataType="vm:TranslateViewModel">
+    <UserControl.KeyBindings>
+        <KeyBinding Gesture="Ctrl+Enter" Command="{Binding TranslateNowCommand}"/>
+    </UserControl.KeyBindings>
+    <ScrollViewer>
+        <StackPanel Spacing="16">
+            <StackPanel Orientation="Horizontal" Spacing="14">
+                <Border Width="54" Height="54" CornerRadius="27" Background="{DynamicResource ThemeBrush}">
+                    <TextBlock Text="م" FontFamily="{StaticResource PersianFont}" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel VerticalAlignment="Center" Spacing="0">
+                    <TextBlock Text="Welcome," Classes="muted"/>
+                    <TextBlock Text="Translator" Classes="welcome"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Grid Classes="desktop-only" ColumnDefinitions="*,*,*,*">
+                <Border Classes="card" Margin="0,0,12,0">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="DICTIONARY" Classes="eyebrow"/>
+                        <TextBlock Text="{Binding TotalWords}" Classes="stat"/>
+                        <TextBlock Text="words on this device" Classes="muted"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Classes="card" Margin="6,0">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="LEARNED ONLINE" Classes="eyebrow"/>
+                        <TextBlock Text="{Binding GoogleCached}" Classes="stat accent"/>
+                        <TextBlock Text="saved from Google" Classes="muted"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Classes="card" Margin="6,0">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="ENGLISH HISTORY" Classes="eyebrow"/>
+                        <TextBlock Text="{Binding EnglishHistory}" Classes="stat lime"/>
+                        <TextBlock Text="English → Persian" Classes="muted"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="3" Classes="card" Margin="12,0,0,0">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="PERSIAN HISTORY" Classes="eyebrow"/>
+                        <TextBlock Text="{Binding PersianHistory}" Classes="stat"/>
+                        <TextBlock Text="Persian → English" Classes="muted"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <UniformGrid Classes="phone-only" Columns="2">
+                <Border Classes="card" Margin="0,0,6,6">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="DICTIONARY" Classes="eyebrow"/>
+                        <TextBlock Text="{Binding TotalWords}" Classes="stat"/>
+                        <TextBlock Text="on this device" Classes="muted"/>
+                    </StackPanel>
+                </Border>
+                <Border Classes="card" Margin="6,0,0,6">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="LEARNED" Classes="eyebrow"/>
+                        <TextBlock Text="{Binding GoogleCached}" Classes="stat accent"/>
+                        <TextBlock Text="from Google" Classes="muted"/>
+                    </StackPanel>
+                </Border>
+                <Border Classes="card" Margin="0,6,6,0">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="ENGLISH" Classes="eyebrow"/>
+                        <TextBlock Text="{Binding EnglishHistory}" Classes="stat lime"/>
+                        <TextBlock Text="English → Persian" Classes="muted"/>
+                    </StackPanel>
+                </Border>
+                <Border Classes="card" Margin="6,6,0,0">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="PERSIAN" Classes="eyebrow"/>
+                        <TextBlock Text="{Binding PersianHistory}" Classes="stat"/>
+                        <TextBlock Text="Persian → English" Classes="muted"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <Border Classes="card">
+                <StackPanel Spacing="14">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="{Binding DirectionLabel}" Classes="eyebrow"/>
+                            <TextBlock Text="Translate" Classes="card-title"/>
+                        </StackPanel>
+                        <Border Classes="chip" Classes.google="{Binding ShowGoogleChip}" Classes.saved="{Binding ShowSavedChip}" IsVisible="{Binding ShowChip}">
+                            <TextBlock Text="{Binding OriginText}"/>
+                        </Border>
+                    </Grid>
+                    <Border Background="{DynamicResource BannerBrush}" CornerRadius="6" Padding="12,8" IsVisible="{Binding IsOfflineOnly}">
+                        <TextBlock Text="Google fallback is off. Only the offline dictionary is used." Foreground="{DynamicResource DangerBrush}"/>
+                    </Border>
+                    <Grid Classes="desktop-only" ColumnDefinitions="*,Auto,*">
+                        <TextBox Grid.Column="0" Classes="editor" Text="{Binding SourceText}" Watermark="Type in English or Persian"
+                                 FontFamily="{Binding SourceTypeface}" FlowDirection="{Binding SourceFlow}"/>
+                        <Button Grid.Column="1" Classes="swap" Margin="12,0" VerticalAlignment="Center" Command="{Binding SwapCommand}" ToolTip.Tip="Swap direction">
+                            <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE8AB;" FontSize="16"/>
+                        </Button>
+                        <TextBox Grid.Column="2" Classes="editor" Text="{Binding Translation, Mode=OneWay}" IsReadOnly="True"
+                                 Watermark="Translation appears here"
+                                 FontFamily="{Binding TargetTypeface}" FlowDirection="{Binding TargetFlow}"/>
+                    </Grid>
+                    <StackPanel Classes="phone-only" Spacing="10">
+                        <TextBox Classes="editor" Text="{Binding SourceText}" Watermark="Type in English or Persian"
+                                 FontFamily="{Binding SourceTypeface}" FlowDirection="{Binding SourceFlow}"/>
+                        <Button Classes="swap" HorizontalAlignment="Center" Command="{Binding SwapCommand}" ToolTip.Tip="Swap direction">
+                            <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE8AB;" FontSize="16"/>
+                        </Button>
+                        <TextBox Classes="editor" Text="{Binding Translation, Mode=OneWay}" IsReadOnly="True"
+                                 Watermark="Translation appears here"
+                                 FontFamily="{Binding TargetTypeface}" FlowDirection="{Binding TargetFlow}"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Error}" Classes="error" IsVisible="{Binding HasError}"/>
+                    <Grid Classes="desktop-only" ColumnDefinitions="Auto,Auto,Auto,*,Auto">
+                        <Button Classes="primary" Content="Translate" Command="{Binding TranslateNowCommand}"/>
+                        <Button Grid.Column="1" Classes="ghost" Content="Copy translation" Margin="10,0,0,0" Command="{Binding CopyTranslationCommand}"/>
+                        <Button Grid.Column="2" Classes="ghost" Content="Copy source" Margin="10,0,0,0" Command="{Binding CopySourceCommand}"/>
+                        <TextBlock Grid.Column="3" Text="{Binding Status}" Classes="muted" VerticalAlignment="Center" Margin="14,0,0,0"/>
+                        <TextBlock Grid.Column="4" Text="Translating..." Classes="muted" VerticalAlignment="Center" IsVisible="{Binding IsBusy}"/>
+                    </Grid>
+                    <WrapPanel Classes="phone-only" Orientation="Horizontal">
+                        <Button Classes="primary" Content="Translate" Margin="0,0,8,8" Command="{Binding TranslateNowCommand}"/>
+                        <Button Classes="ghost" Content="Copy translation" Margin="0,0,8,8" Command="{Binding CopyTranslationCommand}"/>
+                        <Button Classes="ghost" Content="Copy source" Margin="0,0,8,8" Command="{Binding CopySourceCommand}"/>
+                        <TextBlock Text="{Binding Status}" Classes="muted" VerticalAlignment="Center" Margin="0,0,8,8"/>
+                        <TextBlock Text="Translating..." Classes="muted" VerticalAlignment="Center" Margin="0,0,0,8" IsVisible="{Binding IsBusy}"/>
+                    </WrapPanel>
+                    <TextBlock Text="Translation starts as you type. Ctrl+Enter translates now." Classes="muted"/>
+                </StackPanel>
+            </Border>
+
+            <Border Classes="card">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="Recent" Classes="card-title"/>
+                    <TextBlock Text="Translations you make will show up here." Classes="muted" IsVisible="{Binding IsRecentEmpty}"/>
+                    <ItemsControl ItemsSource="{Binding Recent}" IsVisible="{Binding !IsRecentEmpty}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:RecentRow">
+                                <Button Command="{Binding OpenCommand}" Background="Transparent" Padding="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,0,0,8">
+                                    <Border Classes="row">
+                                        <StackPanel Spacing="4">
+                                            <TextBlock Text="{Binding Direction}" Classes="eyebrow"/>
+                                            <TextBlock Text="{Binding Input}" FontFamily="{StaticResource PersianFont}" FlowDirection="{Binding SourceFlow}" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding Translation}" FontFamily="{StaticResource PersianFont}" FlowDirection="{Binding TargetFlow}" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

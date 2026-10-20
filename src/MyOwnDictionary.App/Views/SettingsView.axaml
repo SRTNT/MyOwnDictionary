@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MyOwnDictionary.App.ViewModels"
+             x:Class="MyOwnDictionary.App.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+    <ScrollViewer>
+        <StackPanel Spacing="16" MaxWidth="760" HorizontalAlignment="Left">
+            <Border Classes="card">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="Appearance" Classes="card-title"/>
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <ToggleSwitch IsChecked="{Binding IsDarkTheme}"/>
+                        <TextBlock Text="Dark theme" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Text="Dark follows the Star Admin horizontal layout. Light uses the same layout with green in place of the primary blue." Classes="muted"/>
+                </StackPanel>
+            </Border>
+            <Border Classes="card">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="Online translation" Classes="card-title"/>
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <ToggleSwitch IsChecked="{Binding OnlineFallbackEnabled}"/>
+                        <TextBlock Text="Use Google Translate when a word is missing" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <TextBlock Text="Short phrases of up to five words are saved into the offline dictionary. Longer text is translated but not stored as a dictionary entry." Classes="muted"/>
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock Text="Timeout (seconds)" VerticalAlignment="Center"/>
+                        <NumericUpDown Minimum="3" Maximum="60" Increment="1" Value="{Binding TimeoutSeconds}" Width="140" FormatString="0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Classes="card">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="On this device" Classes="card-title"/>
+                    <TextBlock Text="The dictionary, history, and quiz progress stay in one database. Nothing is uploaded except the text you ask Google to translate." Classes="muted"/>
+                    <TextBlock Text="{Binding StoragePath}" TextWrapping="Wrap"/>
+                    <TextBlock Text="Point this folder at OneDrive or Google Drive and those apps will sync it. Do not open MyOwnDictionary on two computers at the same time, and wait until sync finishes before opening it elsewhere." Classes="muted"/>
+                    <TextBlock Text="{Binding FolderMessage}" Classes="muted" TextWrapping="Wrap"/>
+                    <WrapPanel Orientation="Horizontal">
+                        <Button Classes="ghost" Content="Use OneDrive" Margin="0,0,8,8" Command="{Binding UseOneDriveCommand}"/>
+                        <Button Classes="ghost" Content="Use Google Drive" Margin="0,0,8,8" Command="{Binding UseGoogleDriveCommand}"/>
+                        <Button Classes="ghost" Content="Choose folder..." Margin="0,0,8,8" Click="ChooseFolder"/>
+                        <Button Classes="ghost" Content="Use this PC" Margin="0,0,8,8" Command="{Binding UseLocalCommand}"/>
+                    </WrapPanel>
+                    <TextBlock Text="{Binding OneDriveStatus}" Classes="muted" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding GoogleDriveStatus}" Classes="muted" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
